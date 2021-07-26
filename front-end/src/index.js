@@ -1,21 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "styled-components";
-import themeObj from "./theme";
-import { BrowserRouter as Router } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom';
+import {Provider}from "react-redux"
+import {createStore, applyMiddleware} from "redux"
+import logger from "redux-logger";
+import thunk from "redux-thunk";
+import reducer from "./reducer";
+
+const store = createStore(reducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
-  <ThemeProvider theme={themeObj}>
-    <React.StrictMode>
-      <Router>
-        <App />
-      </Router>
-    </React.StrictMode>
-  </ThemeProvider>,
-  document.getElementById("root")
+  <React.StrictMode>
+    <Provider store = {store}>
+    <Router>
+    <App />
+    </Router>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

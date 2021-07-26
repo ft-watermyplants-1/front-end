@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import Gallery from "./components/Gallery";
 import { Route, Switch } from "react-router-dom";
 
+
 function App() {
   return (
     <div className="App">
