@@ -6,6 +6,13 @@ const Nav = styled.nav`
     display: flex;
     justify-content: space-around;
     background: grey;
+    height: 5vh;
+    align-items: center;
+
+    a{
+        color: ${props => props.theme.black};
+        text-decoration: none;
+    }
 
     & .navLinks{
         display: flex;
@@ -23,7 +30,7 @@ const Nav = styled.nav`
 const Navigation = (props) => {
     return (
         <Nav>
-            <p className = 'logo'>WMP</p>
+            <Link to = '/'>WMP</Link>
             <div className = 'navLinks'>
                 <Link to = '/'>Home</Link>
                 <Link to = '/signup'>Sign Up</Link>
