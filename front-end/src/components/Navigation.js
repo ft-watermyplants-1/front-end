@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 
 const Nav = styled.nav`
     display: flex;
-    justify-content: space-around;
-    background: grey;
+    justify-content: space-between;
+    background: rgb(105, 149, 114);
     height: 5vh;
     align-items: center;
+    padding: 0 5%;
 
     a{
-        color: ${props => props.theme.black};
+        color: ${props => props.theme.white};
+        font-weight: bold;
+        font-size: 1rem;
         text-decoration: none;
     }
 
@@ -21,8 +24,12 @@ const Nav = styled.nav`
         align-self: center;
         
         & a{
-            color: ${props => props.theme.black};
+            color: ${props => props.theme.white};
             text-decoration: none;
+
+            &:hover{
+                color: ${props => props.theme.black};
+            }
         }
     }
 `
