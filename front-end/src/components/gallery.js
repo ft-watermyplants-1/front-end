@@ -3,8 +3,16 @@ import React, { useState, useEffect } from "react";
 import PlantCard from "./plantCard";
 //import * as yup from "yup";
 import axios from "axios";
+import styled from "styled-components";
 
 import dummyData from "./dummyData";
+
+const StyledPlants = styled.div`
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
 
 export default function Gallery(props) {
   const { user_id } = props;
@@ -36,12 +44,14 @@ export default function Gallery(props) {
   // } = props;
 
   return (
-    <div className="plants">
+    <div className="gallery">
       <p>Plant Gallery</p>
-      {plants.map((plant) => {
-        console.log(plant.nickname);
-        return <PlantCard plant={plant} />;
-      })}
+      <StyledPlants>
+        {plants.map((plant) => {
+          console.log(plant.nickname);
+          return <PlantCard plant={plant} />;
+        })}
+      </StyledPlants>
     </div>
   );
 }
