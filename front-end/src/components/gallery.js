@@ -33,16 +33,6 @@ export default function Gallery(props) {
   //   setFormValues(initialFormValues);
   // };
 
-  // const {
-  //   plant_id,
-  //   nickname,
-  //   species,
-  //   days_between_watering,
-  //   notes,
-  //   img_url,
-  //   user_id,
-  // } = props;
-
   return (
     <div className="gallery">
       <p>Plant Gallery</p>
