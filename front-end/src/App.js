@@ -1,11 +1,27 @@
-import "./App.css";
 import Gallery from "./components/gallery";
+import './App.css';
+import Home from './components/Home';
+import Navigation from './components/Navigation';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <h1>This is a Water my plants project</h1>
-      <Gallery />
+
+      <Navigation />
+      <Switch>
+        <Route path = '/login'>
+          <Login />
+        </Route>
+        <Route path = '/signup'>
+          <Signup />
+        </Route>
+        <Route path = '/'>
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 }
