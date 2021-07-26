@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
     display: flex;
@@ -32,19 +32,20 @@ const Nav = styled.nav`
             }
         }
     }
-`
+`;
 
 const Navigation = (props) => {
-    return (
-        <Nav>
-            <Link to = '/'>WMP</Link>
-            <div className = 'navLinks'>
-                <Link to = '/'>Home</Link>
-                <Link to = '/signup'>Sign Up</Link>
-                <Link to = '/login'>Login</Link>
-            </div>
-        </Nav>
-    )
-}
+  return (
+    <Nav>
+      <Link to="/">WMP</Link>
+      <div className="navLinks">
+        <Link to="/">Home</Link>
+        <Link to="/signup">Sign Up</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/gallery">Gallery</Link>
+      </div>
+    </Nav>
+  );
+};
 
 export default Navigation;
