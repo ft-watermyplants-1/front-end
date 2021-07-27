@@ -13,6 +13,18 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import {createTheme, ThemeProvider} from "@material-ui/core/styles"
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#6b705c"
+      },
+      secondary: {
+        main: "#8a5a44"
+      }
+    }
+  });
 
 const initialUserValue = {
     username:"",
@@ -88,13 +100,12 @@ const Login = (props)=>{
     }
 
     return(
+        <ThemeProvider theme = {theme}>
         <FormContainer>
             <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', paddingTop: '.1rem', paddingBottom: '3%', paddingLeft: '3%', paddingRight: '3%', borderRadius: '3%'}}>
                 <CssBaseline />
                 <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOpenIcon />
-                    </Avatar>
+                        <LockOpenIcon fontSize="large" color= "secondary" />
                     <Typography component="h1" variant="h5">
                         Welcome Back
                     </Typography>
@@ -137,7 +148,7 @@ const Login = (props)=>{
                         </Button>
                         <Grid container justify="flex-end">
                             <Grid item>
-                            <Link to="/sign-up" variant="body3">
+                            <Link to="/signup" variant="body3">
                                 Don't have an account? Sign up
                             </Link>
                             </Grid>
@@ -146,6 +157,7 @@ const Login = (props)=>{
                 </div>
             </Container>
         </FormContainer>
+        </ThemeProvider>
     )
 }
 

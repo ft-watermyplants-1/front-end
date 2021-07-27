@@ -13,6 +13,18 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import MuiPhoneNumber from "material-ui-phone-number";
+import {createTheme, ThemeProvider} from '@material-ui/core/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#6b705c"
+    },
+    secondary: {
+      main: "#8a5a44"
+    }
+  }
+});
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
       margin: theme.spacing(3, 0, 2)
-    }
+    },
   }));
 
 const FormContainer = styled.div`
@@ -91,13 +103,12 @@ export default function SignUp() {
     }
 
     return (
+        <ThemeProvider theme = {theme}>
         <FormContainer>
             <Container component="main" maxWidth="xs" style={{backgroundColor: 'white', paddingTop: '.1rem', paddingBottom: '3%', paddingLeft: '3%', paddingRight: '3%', borderRadius: '3%'}}>
                 <CssBaseline />
                 <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
+                        <LockOutlinedIcon fontSize="large" color= "secondary" />
                     <Typography component="h1" variant="h5">
                         Create an Account
                     </Typography>
@@ -163,7 +174,7 @@ export default function SignUp() {
                         </Button>
                         <Grid container justify="flex-end">
                             <Grid item>
-                            <Link href="#" variant="body3">
+                            <Link href="login" variant="body3">
                                 Already have an account? Sign in
                             </Link>
                             </Grid>
@@ -172,5 +183,6 @@ export default function SignUp() {
                 </div>
             </Container>
         </FormContainer>
+        </ThemeProvider>
     )
 }
