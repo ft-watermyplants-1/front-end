@@ -37,10 +37,12 @@ export default function Gallery(props) {
     <div className="gallery">
       <p>Plant Gallery</p>
       <StyledPlants>
-        {plants.map((plant) => {
-          console.log(plant.nickname);
-          return <PlantCard plant={plant} />;
-        })}
+        {
+          plants.map((plant, idx) => {
+              console.log(plant.nickname);
+              return <PlantCard plant = {plant} index = {idx} key = {idx} />;
+          })
+        }
       </StyledPlants>
     </div>
   );

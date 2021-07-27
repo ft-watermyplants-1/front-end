@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import dummyData from "./dummyData";
 
 const StyledPhoto = styled.img`
   width: 100%;
@@ -27,7 +28,22 @@ const StyledPlant = styled.div`
 `;
 
 export default function PlantCard(props) {
-  const { plant } = props;
+  const { plant, index } = props;
+
+  const DeleteButton = () => {
+
+    const deleteCard = () => {
+      dummyData.splice(index, 1);
+      console.log(dummyData);
+      return dummyData;
+    }
+
+    return (
+      <div>
+        <button onClick = {deleteCard} key = {index}>Delete</button>
+      </div>
+    )
+  }
 
   return (
     <StyledPlant className="plant">
@@ -44,6 +60,7 @@ export default function PlantCard(props) {
       <p>Species: {plant.species}</p>
       <p>Days between watering: {plant.days_between_watering}</p>
       {plant.notes ? <p>Notes: {plant.notes}</p> : null}
+      <DeleteButton />
     </StyledPlant>
   );
 }
