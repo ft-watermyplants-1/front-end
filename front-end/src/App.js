@@ -2,7 +2,7 @@ import "./App.css";
 import Home from "./components/Home";
 import Navigation from "./components/Navigation";
 import Login from "./components/SignIn";
-import SignUp from "./components/Signup";
+import SignUp from "./components/SignUp";
 import Gallery from "./components/gallery";
 import { Route, Switch } from "react-router-dom";
 

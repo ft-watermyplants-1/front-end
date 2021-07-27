@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
+import axios from "axios"
 import styled from "styled-components";
 import {Link, useHistory} from "react-router-dom";
 // import {login} from "../actions/SignInActions";
 import {connect} from "react-redux";
-// import {axiosWithAuth} from "./helper/AxiosWithAuth";
-import Avatar from "@material-ui/core/Avatar";
+import {axiosWithAuth} from "../helper/AxiosWithAuth";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -80,11 +80,11 @@ const Login = (props)=>{
 
     const submit = e => {
         e.preventDefault();
-        // axiosWithAuth().post("/api/auth/login", user)
-        // .then(res1=>{
-        //     localStorage.setItem("token", res1.data.token);
-        //     return res1.data.user_id;
-        // })
+        axiosWithAuth().post("/api/auth/login", user)
+        .then(res=>{
+            localStorage.setItem("token", res.data.token);
+            push("/gallery")
+        })
         // .then((res1)=>{
         //     axiosWithAuth().get('/api/')
         //     .then(res2 =>{
@@ -93,9 +93,9 @@ const Login = (props)=>{
         //         push('/protected')
         //     })
         // })
-        // .catch(error=>{
-        //     alert("Username or password is incorrect");
-        // })
+        .catch(error=>{
+            alert("Username or password is incorrect");
+        })
         
     }
 
