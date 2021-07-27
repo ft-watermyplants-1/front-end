@@ -1,8 +1,7 @@
-// import axios from "axios";
+import axios from "axios";
 import React, { useState} from "react";
-// import {useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import styled from 'styled-components'
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -12,7 +11,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import MuiPhoneNumber from "material-ui-phone-number";
+// import MuiPhoneNumber from "material-ui-phone-number";
 import {createTheme, ThemeProvider} from '@material-ui/core/styles';
 
 const theme = createTheme({
@@ -25,7 +24,6 @@ const theme = createTheme({
     }
   }
 });
-
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -60,31 +58,25 @@ const FormContainer = styled.div`
 const initialValues = {
     username: "",
     password: "",
-    phoneNumber: ""
+    phone_number: ""
   };
 
 export default function SignUp() {
 
     const [newUser, setNewUser] = useState(initialValues);
-    // const {push} = useHistory();
+    const {push} = useHistory();
     const classes = useStyles();
-
-    // const handlePhoneChange = value => {
-    //     if (value) {
-    //       this.useState({ phone_number: value });
-    //     }
-    // }
-
 
     const onSubmit = event => {
         event.preventDefault();
-        console.log(newUser);
-        // axios.post("https://ft-watermyplants-1.herokuapp.com/", newUser)
-        // .then(res=>{
-        //     console.log(res.data);
-        //     push("/login");
-        // })
-
+        axios.post("https://ft-watermyplants-1.herokuapp.com/api/auth/register", newUser)
+        .then(res=>{
+            console.log(res.data)
+            push("/gallery");
+        })
+        .catch(err=>{
+            console.log(err);
+        })
     }
 
     // const onChange = (e) => {
@@ -92,9 +84,12 @@ export default function SignUp() {
     //     setNewUser({ ...newUser, [name]: value });
     //   };
 
+    // const handlePhoneChange = (e) => {
+    //       setNewUser({ 
+    //           ...newUser, [phone_number]: e.target.value });
+    // }
+
     const onChange = (e) => {
-        e.preventDefault();
-        // const { name, value } = e.target
         // validate(name, value)
         setNewUser({
             ...newUser,
@@ -141,17 +136,18 @@ export default function SignUp() {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <MuiPhoneNumber
+                                {/* <MuiPhoneNumber
                                     name="phone"
                                     label="Phone Number"
                                     data-cy="user-phone"
                                     defaultCountry={"us"}
-                                    value={newUser.phoneNumber}
+                                    value={newUser.phone_number}
                                     variant="outlined"
                                     required
                                     fullWidth
-                                />
-                                {/* <TextField
+                                    onChange={handlePhoneChange}
+                                /> */}
+                                <TextField
                                     name="phone_number"
                                     variant="outlined"
                                     required
@@ -161,7 +157,7 @@ export default function SignUp() {
                                     label="Phone Number"
                                     onChange={onChange}
                                     value = {newUser.phone_number}
-                                /> */}
+                                />
                             </Grid>
                         </Grid>
                         <Button
