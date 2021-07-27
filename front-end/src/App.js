@@ -17,7 +17,7 @@ function App() {
         <Route path="/signup">
           <Signup />
         </Route>
-        <Route path="/gallery">
+        <Route path="/Gallery">
           <Gallery />
         </Route>
         <Route path="/">

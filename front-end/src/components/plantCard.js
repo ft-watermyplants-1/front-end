@@ -39,7 +39,6 @@ export default function PlantCard(props) {
         }
         alt={plant.nickname}
       />
-      <p>{plant.plant_id}</p>
       <h2>{plant.nickname}</h2>
       <p>Species: {plant.species}</p>
       <p>Days between watering: {plant.days_between_watering}</p>
