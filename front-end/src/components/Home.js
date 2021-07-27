@@ -11,7 +11,7 @@ const HomeDiv = styled.div`
         /* border: 2px red solid; */
     }
 
-    color: ${props => props.theme.black};
+    color: black;
     height: 95vh;
     background: url(${homeBackground}) no-repeat;
     filter: grayscale(40%);
@@ -26,7 +26,7 @@ const HomeDiv = styled.div`
         align-items: center;
         height: auto;
         width: 40%;
-        color: ${props => props.theme.white};
+        color: white;
         font-size: 5rem;
 
         &:hover ~ & div{

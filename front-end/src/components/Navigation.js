@@ -11,7 +11,7 @@ const Nav = styled.nav`
     padding: 0 5%;
 
     a{
-        color: ${props => props.theme.white};
+        color: white;
         font-weight: bold;
         font-size: 1rem;
         text-decoration: none;
@@ -24,11 +24,11 @@ const Nav = styled.nav`
         align-self: center;
         
         & a{
-            color: ${props => props.theme.white};
+            color: white;
             text-decoration: none;
 
             &:hover{
-                color: ${props => props.theme.black};
+                color: black;
             }
         }
     }
