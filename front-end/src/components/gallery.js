@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 //import { Route, Switch, Link } from "react-router-dom";
 import PlantCard from "./PlantCard";
 //import * as yup from "yup";
-import axios from "axios";
 import styled from "styled-components";
 import PlantCreate from "./PlantCreate";
 import dummyData from "./dummyData";
+import { axiosWithAuth } from "../helper/AxiosWithAuth";
+import { useParams } from "react-router";
 //import * as yup from "yup";
 
 const StyledPlants = styled.div`
@@ -31,14 +32,14 @@ const initialFormValues = {
 
 }; */
 
-export default function Gallery(props) {
-  const { user_id } = props;
+export default function Gallery(state) {
+  // const { user_id } = useState(user_id);
 
   const [formValues, setFormValues] = useState(initialFormValues);
   //const [formErrors, setFormErrors] = useState(initialFormErrors);
   //const [disabled, setDisabled] = useState(true);
 
-  const [plants, setPlants] = useState(dummyData);
+  const [plants, setPlants] = useState([]);
   const [showPlantCreate, setShowPlantCreate] = useState(false);
 
   const openPlantCreate = () => {
@@ -51,17 +52,23 @@ export default function Gallery(props) {
 
   //console.log(plants);
 
-  // const getPlants = (plant) => {
-  //   axios
-  //     .get("https://api/users/:{user_id}/plants")
-  //     .then((response) => {
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  //   setFormValues(initialFormValues);
-  // };
+  const getPlants = () => {
+    axiosWithAuth()
+      .get(`/api/users/${2}/plants`)
+      .then((response) => {
+        setPlants(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setFormValues(initialFormValues);
+  };
+
+  useEffect(() => {
+    getPlants();
+  }, []);
+
   const createPlant = () => {
     const plant = {
       nickname: formValues.nickname.trim(),

@@ -1,5 +1,4 @@
 import React from "react";
-import Modal from "react-modal";
 
 export default function PlantModal(props) {
   const { values, submit, change, /* errors, */ disabled } = props;
