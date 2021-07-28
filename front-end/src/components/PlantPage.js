@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
 import { axiosWithAuth } from "../helper/AxiosWithAuth";
-// import Food from "./Food";
+import axios from 'axios'
 
 
 const PlantPage = (props)=>{
-    const {id} = useParams();
+    const {user_id} = useParams();
 
     const [plants, setPlants] = useState();
 
     useEffect(()=>{
-        axiosWithAuth().get(`/api/users/:user_id/plants`)
+        axios.get(`https://ft-watermyplants-1.herokuapp.com/api/users/:${user_id}/plants`)
         .then(res=>{
             setPlants(res.data);
             console.log(res.data);
@@ -25,7 +25,7 @@ const PlantPage = (props)=>{
                     <br></br>
                 </h2>
             </div>}
-            <button onClick={()=>props.history.push("/protected")}>Done</button>
+            <button onClick={()=>props.history.push("/")}>Done</button>
         </div>
         
     )
