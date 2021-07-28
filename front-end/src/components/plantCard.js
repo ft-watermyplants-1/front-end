@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import DeleteButton from "./DeleteButton";
 
 const StyledPhoto = styled.img`
   width: 100%;
@@ -27,7 +28,7 @@ const StyledPlant = styled.div`
 `;
 
 export default function PlantCard(props) {
-  const { plant } = props;
+  const { plant, i } = props;
 
   return (
     <StyledPlant className="plant">
@@ -43,6 +44,7 @@ export default function PlantCard(props) {
       <p>Species: {plant.species}</p>
       <p>Days between watering: {plant.days_between_watering}</p>
       {plant.notes ? <p>Notes: {plant.notes}</p> : null}
+      <DeleteButton index = {i}/>
     </StyledPlant>
   );
 }
