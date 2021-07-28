@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import dummyData from './dummyData';
 
-//random comment  
+//random commen
 
 const DeleteButton = (props) => {
     const { index } = props;
