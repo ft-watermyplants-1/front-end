@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 //import { Route, Switch, Link } from "react-router-dom";
-import PlantCard from "./PlantCard";
+import PlantCard from "./plantCard";
 //import * as yup from "yup";
 import styled from "styled-components";
 import PlantCreate from "./PlantCreate";
 import dummyData from "./dummyData";
 import { axiosWithAuth } from "../helper/AxiosWithAuth";
 import { useParams } from "react-router";
+
 //import * as yup from "yup";
 
 const StyledPlants = styled.div`
@@ -109,9 +110,9 @@ export default function Gallery(state) {
       </div>
 
       <StyledPlants>
-        {plants.map((plant) => {
+        {plants.map((plant, idx) => {
           //console.log(plant.nickname);
-          return <PlantCard key={plant.plant_id} plant={plant} />;
+          return <PlantCard key={plant.plant_id} plant={plant} i = {idx} />;
         })}
       </StyledPlants>
     </div>
