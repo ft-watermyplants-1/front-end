@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 //import { Route, Switch, Link } from "react-router-dom";
-import PlantCard from "./plantCard";
+import PlantCard from "./PlantCard";
 //import * as yup from "yup";
 import styled from "styled-components";
 import PlantCreate from "./PlantCreate";
-import dummyData from "./dummyData";
 import { axiosWithAuth } from "../helper/AxiosWithAuth";
 import { useParams } from "react-router";
-
 //import * as yup from "yup";
 
 const StyledPlants = styled.div`
@@ -34,7 +32,7 @@ const initialFormValues = {
 }; */
 
 export default function Gallery(state) {
-  // const { user_id } = useState(user_id);
+  const user_id = 2; /* useState(user_id) */
 
   const [formValues, setFormValues] = useState(initialFormValues);
   //const [formErrors, setFormErrors] = useState(initialFormErrors);
@@ -55,7 +53,7 @@ export default function Gallery(state) {
 
   const getPlants = () => {
     axiosWithAuth()
-      .get(`/api/users/${2}/plants`)
+      .get(`/api/users/${user_id}/plants`)
       .then((response) => {
         setPlants(response.data);
         console.log(response.data);
@@ -74,13 +72,36 @@ export default function Gallery(state) {
     const plant = {
       nickname: formValues.nickname.trim(),
       species: formValues.species.trim(),
-      days_between_watering: formValues.days_between_watering,
+      days_between_watering: parseInt(formValues.days_between_watering),
       notes: formValues.notes.trim(),
       img_url: formValues.img_url.trim(),
+      user_id: user_id,
     };
     console.log(plant);
-    setPlants([...plants, plant]);
+    axiosWithAuth()
+      .post(`/api/users/${user_id}/plants/`, plant)
+      .then((response) => {
+        setPlants([...plants, response.data]);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     setFormValues(initialFormValues);
+  };
+
+  const deletePlant = (plant_id) => {
+    axiosWithAuth()
+      .delete(`/api/users/${user_id}/plants/${plant_id}`)
+      .then((response) => {
+        getPlants();
+
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const inputChange = (name, value) => {
@@ -110,9 +131,15 @@ export default function Gallery(state) {
       </div>
 
       <StyledPlants>
-        {plants.map((plant, idx) => {
+        {plants.map((plant) => {
           //console.log(plant.nickname);
-          return <PlantCard key={plant.plant_id} plant={plant} i = {idx} />;
+          return (
+            <PlantCard
+              key={plant.plant_id}
+              plant={plant}
+              deletePlant={deletePlant}
+            />
+          );
         })}
       </StyledPlants>
     </div>
