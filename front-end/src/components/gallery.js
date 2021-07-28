@@ -74,7 +74,7 @@ export default function Gallery(props) {
     setPlants([...plants, plant]);
     setFormValues(initialFormValues);
   };
-
+  console.log("Boi");
   const inputChange = (name, value) => {
     setFormValues({
       ...formValues,
