@@ -28,7 +28,7 @@ const StyledPlant = styled.div`
 `;
 
 export default function PlantCard(props) {
-  const { plant, i } = props;
+  const { plant, deletePlant } = props;
 
   return (
     <StyledPlant className="plant">
@@ -44,7 +44,7 @@ export default function PlantCard(props) {
       <p>Species: {plant.species}</p>
       <p>Days between watering: {plant.days_between_watering}</p>
       {plant.notes ? <p>Notes: {plant.notes}</p> : null}
-      <DeleteButton index = {i}/>
+      <DeleteButton plant_id={plant.plant_id} deletePlant={deletePlant} />
     </StyledPlant>
   );
 }
