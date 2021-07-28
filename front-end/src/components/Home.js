@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import homeBackground from '../images/gallery/thumbs/02.jpg';
 
+    //random comment
+
 const HomeDiv = styled.div`
     *{
         margin: 0;
