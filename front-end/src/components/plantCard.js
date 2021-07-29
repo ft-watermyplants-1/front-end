@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
 
 const StyledPhoto = styled.img`
   width: 100%;
@@ -27,8 +28,51 @@ const StyledPlant = styled.div`
   }
 `;
 
+const StyledDiv = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+`;
+
 export default function PlantCard(props) {
-  const { plant, deletePlant } = props;
+  const { plant, submit, deletePlant } = props;
+
+  let initialFormValues = {
+    species: plant.species,
+    days_between_watering: plant.days_between_watering,
+    notes: plant.notes,
+  };
+
+  const [showEdit, setShowEdit] = useState(false);
+  const [formValues, setFormValues] = useState(initialFormValues);
+
+  /*   useEffect(() => {
+    setFormValues({
+
+    });
+    console.log(formValues);
+  }, []); */
+
+  const inputChange = (name, value) => {
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+    console.log(formValues);
+  };
+
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    console.log(formValues);
+    submit(formValues, plant.plant_id);
+  };
+
+  const onChange = (evt) => {
+    const { name, value, type, checked } = evt.target;
+    //console.log(name, value);
+    const valueToUse = type === "checkbox" ? checked : value;
+    inputChange(name, valueToUse);
+  };
 
   return (
     <StyledPlant className="plant">
@@ -41,10 +85,53 @@ export default function PlantCard(props) {
         alt={plant.nickname}
       />
       <h2>{plant.nickname}</h2>
-      <p>Species: {plant.species}</p>
-      <p>Days between watering: {plant.days_between_watering}</p>
-      {plant.notes ? <p>Notes: {plant.notes}</p> : null}
-      <DeleteButton plant_id={plant.plant_id} deletePlant={deletePlant} />
+      {!showEdit ? (
+        <StyledDiv className="plantData">
+          <p>Species: {formValues.species}</p>
+          <p>Days between watering: {plant.days_between_watering}</p>
+
+          {plant.notes ? <p>Notes: {plant.notes}</p> : null}
+        </StyledDiv>
+      ) : (
+        <form onSubmit={onSubmit} className="editPlant-form">
+          <StyledDiv className="plantData species-input" id="species-input">
+            <label>
+              Species:{" "}
+              <input
+                value={formValues.species}
+                onChange={onChange}
+                name="species"
+                type="text"
+              />
+            </label>
+            <label>
+              Days:{" "}
+              <input
+                value={formValues.days_between_watering}
+                onChange={onChange}
+                name="days_between_watering"
+                type="number"
+              />
+            </label>
+            <label>
+              Notes:{" "}
+              <input
+                value={formValues.notes}
+                onChange={onChange}
+                name="notes"
+                type="text"
+              />
+            </label>
+            <div className="submit">
+              <button disabled={false} id="submit-button">
+                Submit Edit
+              </button>
+            </div>
+          </StyledDiv>
+        </form>
+      )}
+      <EditButton showEdit={showEdit} setShowEdit={setShowEdit} />
+      <DeleteButton plant_id={plant.plant_id} deletePlant={deletePlant} />{" "}
     </StyledPlant>
   );
 }
