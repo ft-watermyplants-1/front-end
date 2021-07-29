@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function PlantModal(props) {
-  const { values, submit, change, /* errors, */ disabled } = props;
+  const { values, submit, change /* errors, */ /* disabled */ } = props;
 
   const onSubmit = (evt) => {
     evt.preventDefault();

@@ -5,7 +5,7 @@ import PlantCard from "./PlantCard";
 import styled from "styled-components";
 import PlantCreate from "./PlantCreate";
 import { axiosWithAuth } from "../helper/AxiosWithAuth";
-import { useParams } from "react-router";
+//import { useParams } from "react-router";
 //import * as yup from "yup";
 
 const StyledPlants = styled.div`
@@ -55,11 +55,13 @@ export default function Gallery(state) {
     axiosWithAuth()
       .get(`/api/users/${user_id}/plants`)
       .then((response) => {
-        setPlants(response.data);
+        setPlants(
+          response.data.sort((a, b) => (a.plant_id < b.plant_id ? -1 : 1))
+        );
         console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -84,33 +86,32 @@ export default function Gallery(state) {
         console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
 
     setFormValues(initialFormValues);
   };
 
   const editPlant = (plant, plant_id) => {
-    /*     const plant = {
-      nickname: formValues.nickname.trim(),
-      species: formValues.species.trim(),
-      days_between_watering: parseInt(formValues.days_between_watering),
-      notes: formValues.notes.trim(),
-      img_url: formValues.img_url.trim(),
-    }; */
     console.log(plant);
-    debugger;
+    plant = {
+      nickname: plant.nickname.trim(),
+      species: plant.species.trim(),
+      days_between_watering: parseInt(plant.days_between_watering),
+      notes: plant.notes.trim(),
+      img_url: plant === !null ? plant.img_url.trim() : plant.img_url,
+    };
+    console.log(plant);
     plant.days_between_watering = parseInt(plant.days_between_watering);
     axiosWithAuth()
-      .post(`/api/users/${user_id}/plants/${plant_id}`, { plant })
+      .put(`/api/users/${user_id}/plants/${plant_id}`, plant)
       .then((response) => {
         console.log(response.data);
         getPlants();
       })
       .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {});
+        console.error(error);
+      });
     //setEditFormValues(initialFormValues);
   };
 
@@ -119,11 +120,10 @@ export default function Gallery(state) {
       .delete(`/api/users/${user_id}/plants/${plant_id}`)
       .then((response) => {
         getPlants();
-
-        console.log(response.data);
+        //console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
