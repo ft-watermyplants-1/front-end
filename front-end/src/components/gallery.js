@@ -55,7 +55,9 @@ export default function Gallery(state) {
     axiosWithAuth()
       .get(`/api/users/${user_id}/plants`)
       .then((response) => {
-        setPlants(response.data);
+        setPlants(
+          response.data.sort((a, b) => (a.plant_id < b.plant_id ? -1 : 1))
+        );
         console.log(response.data);
       })
       .catch((error) => {
@@ -91,7 +93,7 @@ export default function Gallery(state) {
   };
 
   const editPlant = (plant, plant_id) => {
-    /*     const plant = {
+    /*           plant = {
       nickname: formValues.nickname.trim(),
       species: formValues.species.trim(),
       days_between_watering: parseInt(formValues.days_between_watering),
@@ -99,18 +101,16 @@ export default function Gallery(state) {
       img_url: formValues.img_url.trim(),
     }; */
     console.log(plant);
-    debugger;
     plant.days_between_watering = parseInt(plant.days_between_watering);
     axiosWithAuth()
-      .post(`/api/users/${user_id}/plants/${plant_id}`, { plant })
+      .put(`/api/users/${user_id}/plants/${plant_id}`, plant)
       .then((response) => {
         console.log(response.data);
         getPlants();
       })
       .catch((error) => {
         console.log(error);
-      })
-      .finally(() => {});
+      });
     //setEditFormValues(initialFormValues);
   };
 
