@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
@@ -38,9 +38,11 @@ export default function PlantCard(props) {
   const { plant, submit, deletePlant } = props;
 
   let initialFormValues = {
+    nickname: plant.nickname,
     species: plant.species,
     days_between_watering: plant.days_between_watering,
     notes: plant.notes,
+    img_url: plant.img_url,
   };
 
   const [showEdit, setShowEdit] = useState(false);
@@ -63,6 +65,7 @@ export default function PlantCard(props) {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
+
     console.log(formValues);
     submit(formValues, plant.plant_id);
   };
@@ -78,15 +81,15 @@ export default function PlantCard(props) {
     <StyledPlant className="plant">
       <StyledPhoto
         src={
-          plant.img_url !== null
+          plant.img_url !== ""
             ? plant.img_url
             : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/houseplants-asplenium-nidus-peperomia-and-fittonia-royalty-free-image-946085220-1557179507.jpg?crop=1.00xw:0.668xh;0,0.332xh&resize=640:*"
         }
         alt={plant.nickname}
       />
-      <h2>{plant.nickname}</h2>
       {!showEdit ? (
         <StyledDiv className="plantData">
+          <h2>{plant.nickname}</h2>
           <p>Species: {formValues.species}</p>
           <p>Days between watering: {plant.days_between_watering}</p>
 
@@ -95,6 +98,26 @@ export default function PlantCard(props) {
       ) : (
         <form onSubmit={onSubmit} className="editPlant-form">
           <StyledDiv className="plantData species-input" id="species-input">
+            <label>
+              img_url
+              <input
+                value={formValues.img_url}
+                onChange={onChange}
+                name="img_url"
+                type="text"
+              />
+            </label>
+
+            <label>
+              nickname*
+              <input
+                value={formValues.nickname}
+                onChange={onChange}
+                name="nickname"
+                type="text"
+              />
+            </label>
+
             <label>
               Species:{" "}
               <input

@@ -5,7 +5,7 @@ import PlantCard from "./PlantCard";
 import styled from "styled-components";
 import PlantCreate from "./PlantCreate";
 import { axiosWithAuth } from "../helper/AxiosWithAuth";
-import { useParams } from "react-router";
+//import { useParams } from "react-router";
 //import * as yup from "yup";
 
 const StyledPlants = styled.div`
@@ -61,7 +61,7 @@ export default function Gallery(state) {
         console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -86,20 +86,21 @@ export default function Gallery(state) {
         console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
 
     setFormValues(initialFormValues);
   };
 
   const editPlant = (plant, plant_id) => {
-    /*           plant = {
-      nickname: formValues.nickname.trim(),
-      species: formValues.species.trim(),
-      days_between_watering: parseInt(formValues.days_between_watering),
-      notes: formValues.notes.trim(),
-      img_url: formValues.img_url.trim(),
-    }; */
+    console.log(plant);
+    plant = {
+      nickname: plant.nickname.trim(),
+      species: plant.species.trim(),
+      days_between_watering: parseInt(plant.days_between_watering),
+      notes: plant.notes.trim(),
+      img_url: plant === !null ? plant.img_url.trim() : plant.img_url,
+    };
     console.log(plant);
     plant.days_between_watering = parseInt(plant.days_between_watering);
     axiosWithAuth()
@@ -109,7 +110,7 @@ export default function Gallery(state) {
         getPlants();
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
     //setEditFormValues(initialFormValues);
   };
@@ -119,11 +120,10 @@ export default function Gallery(state) {
       .delete(`/api/users/${user_id}/plants/${plant_id}`)
       .then((response) => {
         getPlants();
-
-        console.log(response.data);
+        //console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
