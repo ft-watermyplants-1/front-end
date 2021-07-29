@@ -61,7 +61,6 @@ export default function Gallery(state) {
       .catch((error) => {
         console.log(error);
       });
-    setFormValues(initialFormValues);
   };
 
   useEffect(() => {
@@ -89,6 +88,30 @@ export default function Gallery(state) {
       });
 
     setFormValues(initialFormValues);
+  };
+
+  const editPlant = (plant, plant_id) => {
+    /*     const plant = {
+      nickname: formValues.nickname.trim(),
+      species: formValues.species.trim(),
+      days_between_watering: parseInt(formValues.days_between_watering),
+      notes: formValues.notes.trim(),
+      img_url: formValues.img_url.trim(),
+    }; */
+    console.log(plant);
+    debugger;
+    plant.days_between_watering = parseInt(plant.days_between_watering);
+    axiosWithAuth()
+      .post(`/api/users/${user_id}/plants/${plant_id}`, { plant })
+      .then((response) => {
+        console.log(response.data);
+        getPlants();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {});
+    //setEditFormValues(initialFormValues);
   };
 
   const deletePlant = (plant_id) => {
@@ -137,6 +160,7 @@ export default function Gallery(state) {
             <PlantCard
               key={plant.plant_id}
               plant={plant}
+              submit={editPlant}
               deletePlant={deletePlant}
             />
           );
