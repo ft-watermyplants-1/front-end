@@ -32,8 +32,6 @@ const initialFormValues = {
 }; */
 
 export default function Gallery(state) {
-  const user_id = 2; /* useState(user_id) */
-
   const [formValues, setFormValues] = useState(initialFormValues);
   //const [formErrors, setFormErrors] = useState(initialFormErrors);
   //const [disabled, setDisabled] = useState(true);
@@ -76,10 +74,9 @@ export default function Gallery(state) {
       days_between_watering: parseInt(formValues.days_between_watering),
       notes: formValues.notes.trim(),
       img_url: formValues.img_url.trim(),
-      user_id: user_id,
     };
 
-    console.log(plants);
+    console.log(plant);
     axiosWithAuth()
       .post(`/api/plants/`, plant)
       .then((response) => {

@@ -158,7 +158,7 @@ const Login = (props) => {
               >
                 Sign In
               </Button>
-              <Grid container justify="flex-end">
+              <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link to="/signup" variant="body3">
                     Don't have an account? Sign up
