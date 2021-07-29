@@ -11,7 +11,7 @@ const PlantPage = (props)=>{
     const [plants, setPlants] = useState();
 
     useEffect(()=>{
-        axios.get(`https://ft-watermyplants-1.herokuapp.com/api/users/:${user_id}/plants`)
+        axiosWithAuth.get(`/api/users/${user_id}/plants`)
         .then(res=>{
             setPlants(res.data);
             console.log(res.data);
@@ -25,7 +25,7 @@ const PlantPage = (props)=>{
                     <br></br>
                 </h2>
             </div>}
-            <button onClick={()=>props.history.push("/")}>Done</button>
+            {/* <button onClick={()=>props.history.push("/")}>Done</button> */}
         </div>
         
     )

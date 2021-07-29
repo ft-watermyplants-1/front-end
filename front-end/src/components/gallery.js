@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 //import { Route, Switch, Link } from "react-router-dom";
-import PlantCard from "./PlantCard";
+import PlantCard from "./plantCard";
 //import * as yup from "yup";
 import axios from "axios";
 import styled from "styled-components";
 import PlantCreate from "./PlantCreate";
 import dummyData from "./dummyData";
+import PlantPage from "./PlantPage";
 //import * as yup from "yup";
 
 const StyledPlants = styled.div`
@@ -52,8 +53,8 @@ export default function Gallery(props) {
   //console.log(plants);
 
   // const getPlants = (plant) => {
-  //   axios
-  //     .get("https://api/users/:{user_id}/plants")
+  //   axiosWithAuth()
+  //     .get("/api/users/:{user_id}/plants")
   //     .then((response) => {
   //       console.log(response.data);
   //     })
