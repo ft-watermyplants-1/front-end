@@ -5,7 +5,6 @@ export default function PlantModal(props) {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-
     submit();
   };
 
