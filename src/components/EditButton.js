@@ -2,7 +2,7 @@ import React from "react";
 
 const EditButton = (props) => {
   const { showEdit, setShowEdit } = props;
-  console.log(showEdit);
+  //console.log(showEdit);
 
   function editCard() {
     setShowEdit(!showEdit);
@@ -13,7 +13,6 @@ const EditButton = (props) => {
       <button type="button" onClick={editCard}>
         Edit
       </button>
-      <p>{showEdit}</p>
     </div>
   );
 };

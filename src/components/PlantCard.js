@@ -60,14 +60,12 @@ export default function PlantCard(props) {
       ...formValues,
       [name]: value,
     });
-    console.log(formValues);
   };
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-
-    console.log(formValues);
     submit(formValues, plant.plant_id);
+    setShowEdit(!showEdit);
   };
 
   const onChange = (evt) => {
@@ -153,8 +151,13 @@ export default function PlantCard(props) {
           </StyledDiv>
         </form>
       )}
-      <EditButton showEdit={showEdit} setShowEdit={setShowEdit} />
-      <DeleteButton plant_id={plant.plant_id} deletePlant={deletePlant} />{" "}
+      <div
+        className="bottom-buttons"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <EditButton showEdit={showEdit} setShowEdit={setShowEdit} />
+        <DeleteButton plant_id={plant.plant_id} deletePlant={deletePlant} />
+      </div>
     </StyledPlant>
   );
 }
