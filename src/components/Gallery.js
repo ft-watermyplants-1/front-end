@@ -102,7 +102,7 @@ export default function Gallery(state) {
       notes: plant.notes.trim(),
       img_url: plant !== null ? plant.img_url.trim() : "",
     };
-    console.log(plant);
+    console.log(plant, "edit to make me able to push");
     plant.days_between_watering = parseInt(plant.days_between_watering);
     axiosWithAuth()
       .put(`/api/plants/${plant_id}`, plant)
