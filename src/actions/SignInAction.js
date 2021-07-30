@@ -18,7 +18,7 @@ export const login = (credentials) => {
         .then(res => {
             localStorage.setItem("authorization", res.data.token)
             localStorage.setItem("role", res.data.user_id)
-            dispatch(loginSuccess(res.data.token, res.data.user_id))
+            dispatch(loginSuccess())
         })
         .catch(err => {
             dispatch(loginFail(err))

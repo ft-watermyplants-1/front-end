@@ -153,15 +153,6 @@ export default function Gallery(state) {
             color="primary">
           Add New Plant!
         </Button>
-
-        {/* {showPlantCreate && (
-          <PlantCreate
-            submit={createPlant}
-            values={formValues}
-            change={inputChange}
-            close={closePlantCreate}
-          />
-        )} */}
       </div>
       <div>
       {showPlantCreate && (
@@ -176,7 +167,6 @@ export default function Gallery(state) {
 
       <StyledPlants>
         {plants.map((plant) => {
-          //console.log(plant.nickname);
           return (
             <PlantCard
               key={plant.plant_id}

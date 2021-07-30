@@ -40,13 +40,6 @@ const initialFormValues = {
   img_url: "",
 };
 
-/* const initialFormErrors = {
-  nickname: "Please enter your plant's nickname",
-  species: "Please enter your plant's species",
-  days_between_watering: ""
-
-}; */
-
 export default function Gallery(state) {
   const user_id = localStorage.getItem("user_id")
 
@@ -104,14 +97,6 @@ export default function Gallery(state) {
   };
 
   const editPlant = (plant, plant_id) => {
-    /*     const plant = {
-      nickname: formValues.nickname.trim(),
-      species: formValues.species.trim(),
-      days_between_watering: parseInt(formValues.days_between_watering),
-      notes: formValues.notes.trim(),
-      img_url: formValues.img_url.trim(),
-    }; */
-    console.log(plant, plant_id);
     plant.days_between_watering = parseInt(plant.days_between_watering);
     axiosWithAuth()
       .put(`/api/plants/${plant_id}`, plant )
@@ -154,15 +139,6 @@ export default function Gallery(state) {
             color="primary">
           Add New Plant!
         </Button>
-
-        {/* {showPlantCreate && (
-          <PlantCreate
-            submit={createPlant}
-            values={formValues}
-            change={inputChange}
-            close={closePlantCreate}
-          />
-        )} */}
       </div>
       <div>
       {showPlantCreate && (
@@ -177,7 +153,6 @@ export default function Gallery(state) {
 
       <StyledPlants>
         {plants.map((plant) => {
-          //console.log(plant.nickname);
           return (
             <PlantCard
               key={plant.plant_id}

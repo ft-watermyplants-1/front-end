@@ -56,22 +56,12 @@ const Nav = styled.nav`
     }
 `;
 
-// function a11yProps(index) {
-//   return {
-//     id: `simple-tab-${index}`,
-//     'aria-controls': `simple-tabpanel-${index}`,
-//   };
-// }
-
 const Navigation = (props) => {
-  /* const { authenticated } = props;
-  console.log(authenticated); */
   const { push } = useHistory();
   const classes = useStyles();
 
   const logout = () => {
     localStorage.removeItem("authorization");
-    // logout()
     push("/");
   } 
 
@@ -80,12 +70,12 @@ const Navigation = (props) => {
       <Link to="/">WMP</Link>
       <div className="navLinks">
         <Link to="/">Home</Link>
-        {props.authorization ? <div></div> : <Link className={classes.navBar} to="/signup">Sign Up</Link>}
-        {props.authorization ? <div></div> : <Link className={classes.navBar} to="/login">Login</Link>}
-        {props.authorization ? <Link to="/protected/gallery">Gallery</Link> : <div></div>}
-        {props.authorization ? <Link onClick={logout} to="/">Logout</Link> : <div></div> }
-        {/* <Link className={classes.navBar} to="/protected/gallery">Gallery</Link>
-        <Link className={classes.navBar} onClick={logout} to="/">Logout</Link> */}
+        {props.authorization ? null : <Link className={classes.navBar} to="/signup">Sign Up</Link>}
+        {props.authorization ? null : <Link className={classes.navBar} to="/login">Login</Link>}
+        {/* {authorized ? <Link to="/protected/gallery">Gallery</Link> : null}
+        {authorized ? <Link onClick={logout} to="/">Logout</Link> : null } */}
+        <Link className={classes.navBar} to="/protected/gallery">Gallery</Link>
+        <Link className={classes.navBar} onClick={logout} to="/">Logout</Link>
       </div>
     </Nav>
   );
@@ -104,4 +94,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
-//export default Navigation;
