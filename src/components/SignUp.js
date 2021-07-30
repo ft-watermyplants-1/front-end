@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
-// import {login} from "../actions/SignInActions";
-import { connect } from "react-redux";
-import { axiosWithAuth } from "../helper/AxiosWithAuth";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+// import MuiPhoneNumber from "material-ui-phone-number";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const theme = createTheme({
@@ -24,11 +24,6 @@ const theme = createTheme({
     },
   },
 });
-
-const initialUserValue = {
-  username: "",
-  password: "",
-};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -51,52 +46,58 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormContainer = styled.div`
-  background-image: url("https://www.etonline.com/sites/default/files/images/2020-07/bloomscape_plants.jpg");
+  background-image: url("https://post.healthline.com/wp-content/uploads/2020/05/435791-Forget-You-Have-Plants-11-Types-That-Will-Forgive-You_Thumnail.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
   color: #4f4f4f;
-  padding: 12%;
+  padding: 10%;
 `;
 
-const Login = (props) => {
-  const [user, setUser] = useState(initialUserValue);
+const initialValues = {
+  username: "",
+  password: "",
+  phone_number: "",
+};
+
+export default function SignUp() {
+  const [newUser, setNewUser] = useState(initialValues);
   const { push } = useHistory();
   const classes = useStyles();
 
-  const updateLoginForm = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
-  };
-  useEffect(() => {
-    if (props.id) {
-      push("/protected");
-    }
-  }, []);
-
-  const submit = (e) => {
-    e.preventDefault();
-    axiosWithAuth()
-      .post("/api/auth/login", user)
+  const onSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post(
+        "https://ft-watermyplants-1.herokuapp.com/api/auth/register",
+        newUser
+      )
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        console.log(res);
+        console.log(res.data);
         push("/gallery");
       })
-      // .then((res1)=>{
-      //     axiosWithAuth().get('/api/')
-      //     .then(res2 =>{
-      //         const {data} = res2;
-      //         props.dispatch(login(res1, data));
-      //         push('/protected')
-      //     })
-      // })
-      .catch((error) => {
-        alert("Username or password is incorrect");
+      .catch((err) => {
+        console.log(err);
       });
+  };
+
+  // const onChange = (e) => {
+  //     const { name, value } = e.target;
+  //     setNewUser({ ...newUser, [name]: value });
+  //   };
+
+  // const handlePhoneChange = (e) => {
+  //       setNewUser({
+  //           ...newUser, [phone_number]: e.target.value });
+  // }
+
+  const onChange = (e) => {
+    // validate(name, value)
+    setNewUser({
+      ...newUser,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -116,11 +117,11 @@ const Login = (props) => {
         >
           <CssBaseline />
           <div className={classes.paper}>
-            <LockOpenIcon fontSize="large" color="secondary" />
+            <LockOutlinedIcon fontSize="large" color="secondary" />
             <Typography component="h1" variant="h5">
-              Welcome Back
+              Create an Account
             </Typography>
-            <form className={classes.form} onSubmit={submit}>
+            <form className={classes.form} onSubmit={onSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -128,11 +129,11 @@ const Login = (props) => {
                     variant="outlined"
                     required
                     fullWidth
-                    onChange={updateLoginForm}
+                    onChange={onChange}
                     id="username"
                     label="Username"
                     autoFocus
-                    value={user.username}
+                    value={newUser.username}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -144,8 +145,32 @@ const Login = (props) => {
                     id="password"
                     type="password"
                     label="Password"
-                    onChange={updateLoginForm}
-                    value={user.password}
+                    onChange={onChange}
+                    value={newUser.password}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  {/* <MuiPhoneNumber
+                                    name="phone"
+                                    label="Phone Number"
+                                    data-cy="user-phone"
+                                    defaultCountry={"us"}
+                                    value={newUser.phone_number}
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    onChange={handlePhoneChange}
+                                /> */}
+                  <TextField
+                    name="phone_number"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="phone_number"
+                    type="number"
+                    label="Phone Number"
+                    onChange={onChange}
+                    value={newUser.phone_number}
                   />
                 </Grid>
               </Grid>
@@ -156,12 +181,12 @@ const Login = (props) => {
                 color="primary"
                 className={classes.submit}
               >
-                Sign In
+                Sign Up
               </Button>
-              <Grid container justify="flex-end">
+              <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link to="/signup" variant="body3">
-                    Don't have an account? Sign up
+                  <Link href="login" variant="body3">
+                    Already have an account? Sign in
                   </Link>
                 </Grid>
               </Grid>
@@ -171,10 +196,4 @@ const Login = (props) => {
       </FormContainer>
     </ThemeProvider>
   );
-};
-
-export default connect((state) => {
-  return {
-    id: state.user_id,
-  };
-})(Login);
+}
