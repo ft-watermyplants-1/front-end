@@ -195,6 +195,7 @@ export default function PlantCard(props) {
                 </Grid>
                 {/* <div className="submit"> */}
                   <Button
+                  onClick={onSubmit}
                   disabled={false} 
                   id="submit-button"
                   variant="contained"
