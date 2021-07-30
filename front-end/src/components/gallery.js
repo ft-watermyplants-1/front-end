@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 //import { Route, Switch, Link } from "react-router-dom";
-import PlantCard from "./plantCard";
+import PlantCard from "./PlantCard";
 //import * as yup from "yup";
 import styled from "styled-components";
 import PlantCreate from "./PlantCreate";
