@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {logout} from "../actions/SignInAction";
+
+//Material UI
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -72,8 +74,6 @@ const Navigation = (props) => {
         <Link to="/">Home</Link>
         {props.authorization ? null : <Link className={classes.navBar} to="/signup">Sign Up</Link>}
         {props.authorization ? null : <Link className={classes.navBar} to="/login">Login</Link>}
-        {/* {authorized ? <Link to="/protected/gallery">Gallery</Link> : null}
-        {authorized ? <Link onClick={logout} to="/">Logout</Link> : null } */}
         <Link className={classes.navBar} to="/protected/gallery">Gallery</Link>
         <Link className={classes.navBar} onClick={logout} to="/">Logout</Link>
       </div>

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 
 const EditButton = (props) => {
   const { showEdit, setShowEdit } = props;
-  //console.log(showEdit);
 
   function editCard() {
     setShowEdit(!showEdit);

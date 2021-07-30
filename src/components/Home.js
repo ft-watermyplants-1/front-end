@@ -8,7 +8,6 @@ const HomeDiv = styled.div`
         padding: 0;
         max-width: 100%;
         box-sizing: border-box;
-        /* border: 2px red solid; */
     }
 
     color: black;

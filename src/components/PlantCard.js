@@ -8,10 +8,8 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Card, CardContent } from "@material-ui/core";
 
@@ -54,25 +52,6 @@ const StyledPhoto = styled.img`
   height: 100%;
   position: "absolute";
   border-radius: 25px;
-`;
-
-const StyledPlant = styled.div`
-  max-width: 60%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 8px;
-  border: 2px solid black;
-  border-radius: 25px;
-
-  background-color: lightgrey;
-  color: black;
-
-  transition: all 0.2s ease-in-out;
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background-color: lightgrey;
-  }
 `;
 
 const StyledDiv = styled.div`
@@ -193,8 +172,8 @@ export default function PlantCard(props) {
                   label="Notes"
                   />
                 </Grid>
-                {/* <div className="submit"> */}
                   <Button
+                  onClick={onSubmit}
                   disabled={false} 
                   id="submit-button"
                   variant="contained"
@@ -203,7 +182,6 @@ export default function PlantCard(props) {
                   >
                     Submit Edit
                   </Button>
-                {/* </div> */}
             </Grid>
           </StyledDiv>
         </form>
