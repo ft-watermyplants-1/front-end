@@ -1,11 +1,48 @@
 import React from "react";
 
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+// import LockOpenIcon from "@material-ui/icons/LockOpen";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "rgb(105, 149, 114)",
+    },
+    secondary: {
+      main: "#8a5a44",
+    },
+  },
+});
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(1),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  form: {
+    width: "100%",
+    marginTop: theme.spacing(2),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
 export default function PlantModal(props) {
   const { values, submit, change, /* errors, */ disabled } = props;
+  const classes = useStyles();
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-
     submit();
   };
 
@@ -16,79 +53,100 @@ export default function PlantModal(props) {
   };
 
   return (
-    <div>
-      <p>New Plant</p>
-      <form onSubmit={onSubmit} className="plant-form">
-        <div className="nickname-input" id="nickname-input">
-          <label>
-            nickname*
-            <input
+    <ThemeProvider theme = {theme}>
+        <Container
+          component="main"
+          maxWidth="xs"
+          style={{
+            paddingTop: ".1rem",
+            paddingBottom: "1%",
+            paddingLeft: "3%",
+            paddingRight: "3%",
+            marginBottom: "2%",
+            borderRadius: "3%",
+            backgroundColor:"lightgrey"
+          }}
+        >
+          <CssBaseline />
+    <div className={classes.paper}>
+    <Typography component="h1" variant="h5">
+              New Plant
+            </Typography>
+      <form onSubmit={onSubmit} className={classes.form}>
+      <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+              name="nickname"
+              variant="outlined"
+              required
+              fullWidth
               value={values.nickname}
               onChange={onChange}
-              name="nickname"
-              type="text"
-            />
-          </label>
-        </div>
-
-        <div className="species-input" id="species-input">
-          <label>
-            Species
-            <input
+              id="nickname"
+              label="Nickname"
+              />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              name="species"
+              variant="outlined"
+              required
+              fullWidth
               value={values.species}
               onChange={onChange}
               name="species"
-              type="text"
+              id="species"
+              label="Species"
             />
-          </label>
-        </div>
-
-        <div
-          className="days_between_watering-input"
-          id="days_between_watering-input"
-        >
-          <label>
-            Days Between Watering
-            <input
+            </Grid>
+          <Grid item xs={12}>
+          <TextField
+              name="days_between_watering"
+              variant="outlined"
+              required
+              fullWidth
               value={values.days_between_watering}
               onChange={onChange}
-              name="days_between_watering"
+              id="days_between_watering"
+              label="Days Between Watering"
               type="number"
             />
-          </label>
-        </div>
-
-        <div className="notes-input" id="notes-input">
-          <label>
-            notes
-            <input
-              value={values.notes}
-              onChange={onChange}
-              name="notes"
-              type="text"
+          </Grid>
+            <Grid item xs={12}>
+            <TextField
+            name="notes"
+            variant="outlined"
+            fullWidth
+            value={values.notes}
+            onChange={onChange}
+            id="notes"
+            label="Notes"
             />
-          </label>
-        </div>
-
-        <div className="img_url-input" id="img_url-input">
-          <label>
-            img_url
-            <input
+            </Grid>
+            <Grid item xs={12}>
+            <TextField
+              name="img_url"
+              variant="outlined"
+              fullWidth
               value={values.img_url}
               onChange={onChange}
-              name="img_url"
-              type="text"
+              id="img_url"
+              label="Place Image URL Here"
             />
-          </label>
-        </div>
-
-        <div className="submit">
-          <button disabled={false} id="submit-button">
+            </Grid>
+          <Button disabled={false} type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
             Submit Plant
-          </button>
-        </div>
+          </Button>
+        </Grid>
       </form>
     </div>
+    </Container>
+    </ThemeProvider>
   );
 }
 /**        <div className="errors">
