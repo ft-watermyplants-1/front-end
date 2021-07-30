@@ -47,13 +47,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormContainer = styled.div`
-  background-image: url("https://post.healthline.com/wp-content/uploads/2020/05/435791-Forget-You-Have-Plants-11-Types-That-Will-Forgive-You_Thumnail.jpg");
+  background-image: url("https://wallpaperaccess.com/full/343990.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
   color: #4f4f4f;
-  padding: 10%;
+  padding-top: 12%;
+  padding-bottom: 15%;
 `;
 
 const initialValues = {

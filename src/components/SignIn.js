@@ -58,8 +58,10 @@ const FormContainer = styled.div`
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
+  height: max-content;
   color: #4f4f4f;
-  padding: 12%;
+  padding-top: 12%;
+  padding-bottom: 15%;
 `;
 
 const Login = (props) => {
