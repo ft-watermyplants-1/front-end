@@ -153,8 +153,8 @@ export default function PlantCard(props) {
           </Typography>
           <Typography className={classes.info}>
             {plant.notes ? <Typography className={classes.info}>
-              Notes: {plant.notes}
-              </Typography> : null}
+                            Notes: {plant.notes}
+                            </Typography> : null}
           </Typography>
         </StyledDiv>
       ) : (

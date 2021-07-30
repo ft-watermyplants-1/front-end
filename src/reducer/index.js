@@ -3,7 +3,7 @@ import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../actions/SignI
 export const initialState = {
     isLoading: false,
     error: "",
-    isAuth: false,
+    authorization: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
             return({
                 ...state,
                 isLoading: false,
-                isAuth: true,
+                authorization: true,
             })
         case(LOGIN_FAIL):
             return({
@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
         case(LOGOUT):
             return({
                 ...state,
-                isAuth: false,
+                authorization: false,
             })
         default: return state
     }

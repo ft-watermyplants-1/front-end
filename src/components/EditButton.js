@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
 
 const EditButton = (props) => {
   const { showEdit, setShowEdit } = props;
@@ -10,9 +11,16 @@ const EditButton = (props) => {
 
   return (
     <div>
-      <button type="button" onClick={editCard}>
+      <Button item xs={12}
+        type="button" 
+        onClick={editCard}
+        fullWidth
+        variant="contained"
+        color="primary"
+        >
         Edit
-      </button>
+      </Button>
+      <p>{showEdit}</p>
     </div>
   );
 };

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
-// import {login} from "../actions/SignInActions";
+import {loginSuccess} from "../actions/SignInAction";
 import { connect } from "react-redux";
 import { axiosWithAuth } from "../helper/AxiosWithAuth";
+
+// Material UI
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -73,18 +75,20 @@ const Login = (props) => {
   };
   useEffect(() => {
     if (props.id) {
-      push("/protected");
+      push("/");
     }
-  }, []);
+  }/*, []*/);
 
   const submit = (e) => {
     e.preventDefault();
     axiosWithAuth()
       .post("/api/auth/login", user)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("authorization", res.data.token);
+        localStorage.setItem("user_id", res.data.user_id);
         console.log(res);
-        push("/gallery");
+        loginSuccess()
+        push("/protected/gallery");
       })
       // .then((res1)=>{
       //     axiosWithAuth().get('/api/')
