@@ -27,13 +27,13 @@ const theme = createTheme({
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 325,
-    border: '1px solid gray',
-    margin: '1em'
+    border: "1px solid gray",
+    margin: "1em",
   },
   bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
   },
   info: {
     fontSize: 18,
@@ -107,91 +107,98 @@ export default function PlantCard(props) {
 
   return (
     <Card className={classes.root}>
-    <ThemeProvider theme = {theme}>
-    {/* <StyledPlant className="plant"> */}
-    <CardContent>
-      <CssBaseline>
-      <StyledPhoto
-        src={
-          plant.img_url !== null
-            ? plant.img_url
-            : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/houseplants-asplenium-nidus-peperomia-and-fittonia-royalty-free-image-946085220-1557179507.jpg?crop=1.00xw:0.668xh;0,0.332xh&resize=640:*"
-        }
-        alt={plant.nickname}
-      />
-      <Typography className={classes.pos} variant="h4">
-        {plant.nickname}
-      </Typography>
-      {!showEdit ? (
-        <StyledDiv className="plantData">
-          <Typography className={classes.info}>
-            Species: {formValues.species}
-          </Typography>
-          <Typography className={classes.info}>
-            Days between watering: {plant.days_between_watering}
-          </Typography>
-          <Typography className={classes.info}>
-            {plant.notes ? <Typography className={classes.info}>
-              Notes: {plant.notes}
-              </Typography> : null}
-          </Typography>
-        </StyledDiv>
-      ) : (
-        
-        <form onSubmit={onSubmit} className="editPlant-form">
-          <StyledDiv className="plantData species-input" id="species-input">
-          <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                  name="species"
-                  variant="outlined"
-                  value={formValues.species}
-                  onChange={onChange}
-                  id="species"
-                  label="Species"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                  name="days_between_watering"
-                  variant="outlined"
-                  value={formValues.days_between_watering}
-                  onChange={onChange}
-                  id="days_between_watering"
-                  label="Days_between_watering"
-                  type="number"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                  name="notes"
-                  variant="outlined"
-                  value={formValues.notes}
-                  onChange={onChange}
-                  id="notes"
-                  label="Notes"
-                  />
-                </Grid>
-                  <Button
-                  onClick={onSubmit}
-                  disabled={false} 
-                  id="submit-button"
-                  variant="contained"
-                  color="secondary"
-                  className={classes.submit}
-                  >
-                    Submit Edit
-                  </Button>
-            </Grid>
-          </StyledDiv>
-        </form>
-      )}
-      <EditButton showEdit={showEdit} setShowEdit={setShowEdit} />
-      <DeleteButton plant_id={plant.plant_id} deletePlant={deletePlant} />{" "}
-      </CssBaseline>
-    {/* </StyledPlant> */}
-    </CardContent>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        {/* <StyledPlant className="plant"> */}
+        <CardContent>
+          <CssBaseline>
+            <StyledPhoto
+              src={
+                plant.img_url
+                  ? plant.img_url
+                  : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/houseplants-asplenium-nidus-peperomia-and-fittonia-royalty-free-image-946085220-1557179507.jpg?crop=1.00xw:0.668xh;0,0.332xh&resize=640:*"
+              }
+              alt={plant.nickname}
+            />
+            <Typography className={classes.pos} variant="h4">
+              {plant.nickname}
+            </Typography>
+            {!showEdit ? (
+              <StyledDiv className="plantData">
+                <Typography className={classes.info}>
+                  Species: {formValues.species}
+                </Typography>
+                <Typography className={classes.info}>
+                  Days between watering: {plant.days_between_watering}
+                </Typography>
+                <Typography className={classes.info}>
+                  {plant.notes ? (
+                    <Typography className={classes.info}>
+                      Notes: {plant.notes}
+                    </Typography>
+                  ) : null}
+                </Typography>
+              </StyledDiv>
+            ) : (
+              <form onSubmit={onSubmit} className="editPlant-form">
+                <StyledDiv
+                  className="plantData species-input"
+                  id="species-input"
+                >
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <TextField
+                        name="species"
+                        variant="outlined"
+                        value={formValues.species}
+                        onChange={onChange}
+                        id="species"
+                        label="Species"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        name="days_between_watering"
+                        variant="outlined"
+                        value={formValues.days_between_watering}
+                        onChange={onChange}
+                        id="days_between_watering"
+                        label="Days_between_watering"
+                        type="number"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        name="notes"
+                        variant="outlined"
+                        value={formValues.notes}
+                        onChange={onChange}
+                        id="notes"
+                        label="Notes"
+                      />
+                    </Grid>
+                    <Button
+                      onClick={onSubmit}
+                      disabled={false}
+                      id="submit-button"
+                      variant="contained"
+                      color="secondary"
+                      className={classes.submit}
+                    >
+                      Submit Edit
+                    </Button>
+                  </Grid>
+                </StyledDiv>
+              </form>
+            )}
+            <EditButton showEdit={showEdit} setShowEdit={setShowEdit} />
+            <DeleteButton
+              plant_id={plant.plant_id}
+              deletePlant={deletePlant}
+            />{" "}
+          </CssBaseline>
+          {/* </StyledPlant> */}
+        </CardContent>
+      </ThemeProvider>
     </Card>
   );
 }
