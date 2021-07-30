@@ -14,11 +14,11 @@ export const login = (credentials) => {
         dispatch(loginStart(credentials));
 
         axios
-        .post("", credentials)
+        .post("https://ft-watermyplants-1.herokuapp.com/api/auth/login", credentials)
         .then(res => {
-            localStorage.setItem("token", res.data.token)
-            localStorage.setItem("role", res.data.user.role)
-            dispatch(loginSuccess(res.data.token, res.data.user.role))
+            localStorage.setItem("authorization", res.data.token)
+            localStorage.setItem("role", res.data.user_id)
+            dispatch(loginSuccess(res.data.token, res.data.user_id))
         })
         .catch(err => {
             dispatch(loginFail(err))
@@ -30,8 +30,8 @@ export const loginStart = (credentials) => {
     return({type:LOGIN_START, payload:credentials});
 }
 
-export const loginSuccess = (token, role) => {
-    return({type:LOGIN_SUCCESS, token, role})
+export const loginSuccess = () => {
+    return({type:LOGIN_SUCCESS})
 }
 
 export const loginFail = (error) => {
