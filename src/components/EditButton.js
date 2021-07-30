@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 
 const EditButton = (props) => {
   const { showEdit, setShowEdit } = props;
-  console.log(showEdit);
+  //console.log(showEdit);
 
   function editCard() {
     setShowEdit(!showEdit);

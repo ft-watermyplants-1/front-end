@@ -14,7 +14,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Card, CardContent } from "@material-ui/core";
-// import CardMedia from '@material-ui/core/CardMedia';
 
 const theme = createTheme({
   palette: {

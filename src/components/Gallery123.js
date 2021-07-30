@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-//import { Route, Switch, Link } from "react-router-dom";
 import PlantCard from "./PlantCard";
-//import * as yup from "yup";
 import styled from "styled-components";
 import PlantCreate from "./PlantCreate";
 import { axiosWithAuth } from "../helper/AxiosWithAuth";
-// import { useParams } from "react-router";
 
 // Material UI
 import Button from "@material-ui/core/Button";
@@ -54,8 +51,6 @@ export default function Gallery(state) {
   const user_id = localStorage.getItem("user_id")
 
   const [formValues, setFormValues] = useState(initialFormValues);
-  //const [formErrors, setFormErrors] = useState(initialFormErrors);
-  //const [disabled, setDisabled] = useState(true);
 
   const [plants, setPlants] = useState([]);
   const [showPlantCreate, setShowPlantCreate] = useState(false);
@@ -68,17 +63,16 @@ export default function Gallery(state) {
     setShowPlantCreate(false);
   };
 
-  //console.log(plants);
-
   const getPlants = () => {
     axiosWithAuth()
       .get(`/api/plants`)
       .then((response) => {
-        setPlants(response.data);
-        console.log(response.data);
+        setPlants(
+          response.data.sort((a, b) => (a.plant_id < b.plant_id ? -1 : 1))
+        );
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -93,9 +87,8 @@ export default function Gallery(state) {
       days_between_watering: parseInt(formValues.days_between_watering),
       notes: formValues.notes.trim(),
       img_url: formValues.img_url.trim(),
-      user_id: user_id,
     };
-    console.log(plant);
+
     axiosWithAuth()
       .post(`/api/plants`, plant)
       .then((response) => {
@@ -103,7 +96,7 @@ export default function Gallery(state) {
         console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
 
     setFormValues(initialFormValues);
@@ -126,10 +119,8 @@ export default function Gallery(state) {
         getPlants();
       })
       .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {});
-    //setEditFormValues(initialFormValues);
+        console.error(error);
+      });
   };
 
   const deletePlant = (plant_id) => {
@@ -137,11 +128,9 @@ export default function Gallery(state) {
       .delete(`/api/plants/${plant_id}`)
       .then((response) => {
         getPlants();
-
-        console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 

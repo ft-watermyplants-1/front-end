@@ -19,7 +19,6 @@ function App() {
           <SignUp />
         </Route>
         <PrivateRoute exact path="/protected/gallery" component = {Gallery}>
-          {/* <Gallery /> */}
         </PrivateRoute>
         <Route path="/">
           <Home />
