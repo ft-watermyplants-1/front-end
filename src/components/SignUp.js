@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+
+//Material UI
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -11,7 +13,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-// import MuiPhoneNumber from "material-ui-phone-number";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const theme = createTheme({
@@ -66,34 +67,40 @@ export default function SignUp() {
   const { push } = useHistory();
   const classes = useStyles();
 
+  const checkFormValidity = (newUser) => {
+    if (newUser.username.length < 3 || newUser.username.length > 30) {
+      alert("Username must be between 3 and 30 characters.")
+      return false
+    } else if (newUser.password.length < 6 || newUser.password.length > 30) {
+      alert("Password must be between 6 and 30 characters.")
+      return false
+    } else if (newUser.phone_number.length < 10) {
+      alert("Please input a valid phone number containing 10 digits.")
+      return false
+    }
+    return true
+  }
+
   const onSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(
-        "https://ft-watermyplants-1.herokuapp.com/api/auth/register",
-        newUser
-      )
-      .then((res) => {
-        console.log(res.data);
-        push("/gallery");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (checkFormValidity(newUser)) {
+      axios
+        .post(
+          "https://ft-watermyplants-1.herokuapp.com/api/auth/register",
+          newUser
+        )
+        .then((res) => {
+          console.log(res.data);
+          push("/gallery");
+        })
+        .catch((err) => {
+          alert(err.response.data.message);
+          console.log(err);
+        });
+    }
   };
 
-  // const onChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setNewUser({ ...newUser, [name]: value });
-  //   };
-
-  // const handlePhoneChange = (e) => {
-  //       setNewUser({
-  //           ...newUser, [phone_number]: e.target.value });
-  // }
-
   const onChange = (e) => {
-    // validate(name, value)
     setNewUser({
       ...newUser,
       [e.target.name]: e.target.value,
@@ -150,17 +157,6 @@ export default function SignUp() {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  {/* <MuiPhoneNumber
-                                    name="phone"
-                                    label="Phone Number"
-                                    data-cy="user-phone"
-                                    defaultCountry={"us"}
-                                    value={newUser.phone_number}
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    onChange={handlePhoneChange}
-                                /> */}
                   <TextField
                     name="phone_number"
                     variant="outlined"

@@ -77,7 +77,7 @@ const Login = (props) => {
     if (props.id) {
       push("/");
     }
-  }/*, []*/);
+  });
 
   const submit = (e) => {
     e.preventDefault();
@@ -90,14 +90,6 @@ const Login = (props) => {
         loginSuccess()
         push("/protected/gallery");
       })
-      // .then((res1)=>{
-      //     axiosWithAuth().get('/api/')
-      //     .then(res2 =>{
-      //         const {data} = res2;
-      //         props.dispatch(login(res1, data));
-      //         push('/protected')
-      //     })
-      // })
       .catch((error) => {
         alert("Username or password is incorrect");
       });

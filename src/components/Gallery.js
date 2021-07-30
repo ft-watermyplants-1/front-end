@@ -41,8 +41,6 @@ const initialFormValues = {
 };
 
 export default function Gallery(state) {
-  const user_id = localStorage.getItem("user_id")
-
   const [formValues, setFormValues] = useState(initialFormValues);
 
   const [plants, setPlants] = useState([]);

@@ -1,5 +1,6 @@
 import React from "react";
 
+//Material UI
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PlantModal(props) {
-  const { values, submit, change, /* errors, */ disabled } = props;
+  const { values, submit, change } = props;
   const classes = useStyles();
 
   const onSubmit = (evt) => {
@@ -93,7 +94,6 @@ export default function PlantModal(props) {
               fullWidth
               value={values.species}
               onChange={onChange}
-              name="species"
               id="species"
               label="Species"
             />
@@ -148,9 +148,3 @@ export default function PlantModal(props) {
     </ThemeProvider>
   );
 }
-/**        <div className="errors">
-          {// 🔥 RENDER THE VALIDATION ERRORS HERE 
-          }
-          <div>{errors.name}</div>
-          <div>{errors.size}</div>
-        </div> **/
