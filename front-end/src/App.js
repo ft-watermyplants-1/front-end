@@ -3,7 +3,7 @@ import Home from "./components/Home";
 import Navigation from "./components/Navigation";
 import Login from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import Gallery from "./components/gallery";
+import Gallery from "./components/Gallery";
 import PrivateRoute from "./helper/PrivateRoute";
 import { Route, Switch } from "react-router-dom";
 
