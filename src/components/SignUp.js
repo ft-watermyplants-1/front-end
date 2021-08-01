@@ -92,7 +92,7 @@ export default function SignUp() {
         )
         .then((res) => {
           console.log(res.data);
-          push("/gallery");
+          push("/protected/gallery");
         })
         .catch((err) => {
           alert(err.response.data.message);
